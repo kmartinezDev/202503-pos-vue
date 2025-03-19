@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import ShopView from '@/views/ShopView.vue'
+import AdminLayout from '@/views/admin/AdminLayout.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,7 +13,7 @@ const router = createRouter({
     {
       path: '/admin',
       name: 'admin',
-      component: () => import('../views/admin/AdminLayout.vue'),
+      component: AdminLayout,
       children: [
         {
           path: 'productos',

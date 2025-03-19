@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@formkit/vue": "^1.6.9",
     "@tailwindcss/postcss": "^4.0.14",
     "pinia": "^3.0.1",
     "postcss": "^8.5.3",
