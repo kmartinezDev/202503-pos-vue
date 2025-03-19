@@ -18,6 +18,7 @@
             <FormKit
                 type="form"
                 submit-label="Agregar Producto"
+                
             >
                 <FormKit 
                     type="text"
