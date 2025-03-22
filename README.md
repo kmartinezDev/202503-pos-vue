@@ -12,6 +12,7 @@ See [Vite Configuration Reference](https://vite.dev/config/).
 
 Taildwind css => https://tailwindcss.com/docs/installation/using-postcss
 @formkit/vue => https://formkit.com/inputs/file#page-container
+https://heroicons.com/
 
 ## Project Setup
 

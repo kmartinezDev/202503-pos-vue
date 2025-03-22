@@ -1,5 +1,37 @@
 <script setup>
+    import { reactive } from 'vue';
+    import { useRouter } from 'vue-router';
     import Link from '@/components/Link.vue';
+    import useImage from '@/composables/useImage';
+    import { useProductsStore } from '@/stores/products';
+
+    const { onFileChange, url, isImageUploaded } = useImage();
+    const productsStore = useProductsStore();
+    const router = useRouter();
+
+    const formData = reactive({
+        name: '',
+        category: '',
+        price: '',
+        available: '',
+        image: null
+    });
+
+    const submitHandler = async data => {
+        const { image, ...values } = data
+        
+        try {
+            await productsStore.createProduct({
+                ...values, 
+                image: url.value 
+            })
+
+            router.push({ name: 'admin-products' })
+        } catch (error) {
+            
+        }
+    }
+
 </script>
 
 <template>
@@ -18,7 +50,9 @@
             <FormKit
                 type="form"
                 submit-label="Agregar Producto"
-                
+                incomplete-message="Completa todos los campos para agregar un producto"
+                @submit="submitHandler" 
+                :value="formData"
             >
                 <FormKit 
                     type="text"
@@ -27,6 +61,7 @@
                     placeholder="Nombre del producto"
                     validation="required"
                     :validation-messages="{ required: 'El nombre del producto es requerido' }"
+                    v-model.trim="formData.name"
                 />
 
                 <FormKit 
@@ -36,7 +71,18 @@
                     validation="required"
                     :validation-messages="{ required: 'La imagen del producto es obligatoria' }"
                     accept="image/*"
+                    @change="onFileChange"
+                    v-model="formData.image"
                 />
+
+                <div v-if="isImageUploaded">
+                    <p class="font-black">Imagen del producto:</p>
+                    <img 
+                        :src="url" 
+                        alt="Imagen del producto" 
+                        class="w-32 h-32" 
+                    />
+                </div>
 
                 <FormKit 
                     type="select"
@@ -44,7 +90,8 @@
                     name="category"
                     validation="required"
                     :validation-messages="{ required: 'La categoria es obligatoria' }"
-                    :options="[1,2,3,4,5]"
+                    :options="productsStore.categoryOptions"
+                    v-model.number="formData.category"
                 />
 
                 <FormKit 
@@ -55,6 +102,7 @@
                     validation="required"
                     :validation-messages="{ required: 'El precio del producto es requerido' }"
                     min="0"
+                    v-model.number="formData.price"
                 />
 
                 <FormKit 
@@ -65,6 +113,7 @@
                     validation="required"
                     :validation-messages="{ required: 'La cantidad del productos es obligatoria' }"
                     min="1"
+                    v-model.number="formData.available"
                 />
             </FormKit>
 
