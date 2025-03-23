@@ -28,10 +28,20 @@
     })
 
     watch(product, (product) => {
-        
+
         if(!product) router.push({ name: 'admin-products' })
         Object.assign(formData, product)
     })
+
+    const submitHandler = async data => {
+        
+        try {
+            await products.updateProduct(docRef, { ...data, url })
+                
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
 </script>
 
