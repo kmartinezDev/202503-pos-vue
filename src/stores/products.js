@@ -79,7 +79,9 @@ export const useProductsStore = defineStore('products', () => {
 
         if (!selectedCategory.value) return productsCollection.value;
 
-        return productsCollection.value.filter(product => product.category === selectedCategory.value);
+        return productsCollection.value
+            .filter(product => product.category === selectedCategory.value) 
+            .filter(product => product.available > 0);
     });
 
     return {

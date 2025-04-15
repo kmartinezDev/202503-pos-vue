@@ -10,9 +10,10 @@ This template should help get you started developing with Vue 3 in Vite.
 
 See [Vite Configuration Reference](https://vite.dev/config/).
 
-Taildwind css => https://tailwindcss.com/docs/installation/using-postcss
+Tailwind css => https://tailwindcss.com/docs/installation/using-postcss
 @formkit/vue => https://formkit.com/inputs/file#page-container
-https://heroicons.com/
+Icons => https://heroicons.com/
+Tailwind Datepicker => https://vue-tailwind-datepicker.com/
 
 ## Project Setup
 

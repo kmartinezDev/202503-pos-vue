@@ -1,8 +1,9 @@
 <script setup>
     import { formatCurrency } from '@/helpers';
     import { useProductsStore } from '@/stores/products';
+    import { computed } from 'vue';
 
-    defineProps({
+    const props = defineProps({
         product: {
             type: Object,
             required: true
@@ -11,10 +12,15 @@
 
     const productsStore = useProductsStore();
 
+    const isProductInStock = computed(() => props.product.available === 0 );
+
 </script>
 
 <template>
-    <li class="flex items-center space-x-6 border border-gray-200 p-6 bg-white shadow">
+    <li
+        :class="{ 'opacity-40': isProductInStock }" 
+        class="flex items-center space-x-6 border border-gray-200 p-6 bg-white shadow"
+    >
         <img
             :src="product.image"
             :alt="product.name"
